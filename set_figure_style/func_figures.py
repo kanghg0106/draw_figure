@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
 import matplotlib.patches as mpatches
-from matplotlib.ticker import AutoMinorLocator
+from matplotlib.ticker import AutoMinorLocator, FormatStrFormatter
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["mathtext.fontset"] = "custom"
@@ -89,6 +89,8 @@ def set_frame_style(
     minor_tick_length=3.0,
     xtick_rotation=0,
     ytick_rotation=0,
+    xformat: str | None = None,   # 추가: x축 major tick 포맷 ('%.1f' 등)
+    yformat: str | None = None,   # 추가: y축 major tick 포맷
     **kwargs,
 ):
     """
@@ -131,6 +133,12 @@ def set_frame_style(
     ax.set_title(f'{title}', fontsize=title_fontsize, y=1.05)
     ax.set_xlabel(f'{xlabel}', fontsize=xlabel_fontsize, labelpad=x_labelpad)
     ax.set_ylabel(f'{ylabel}', fontsize=ylabel_fontsize, labelpad=y_labelpad)
+
+    # tick label formatter (자리수 설정)
+    if xformat is not None:
+        ax.xaxis.set_major_formatter(FormatStrFormatter(xformat))
+    if yformat is not None:
+        ax.yaxis.set_major_formatter(FormatStrFormatter(yformat))
 
     # 스파인 두께
     for ax_i in ['top', 'bottom', 'left', 'right']:
