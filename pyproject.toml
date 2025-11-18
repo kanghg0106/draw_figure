@@ -19,4 +19,4 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["set_figure_style"]
+include = ["set_figure_style"] 
